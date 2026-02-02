@@ -5,7 +5,7 @@ object FrmTelaConsultaPaises: TFrmTelaConsultaPaises
   BorderStyle = bsSingle
   Caption = 'Consulta de pa'#237'ses'
   ClientHeight = 265
-  ClientWidth = 702
+  ClientWidth = 706
   Color = clSilver
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -407,6 +407,34 @@ object FrmTelaConsultaPaises: TFrmTelaConsultaPaises
       A2A8BF527C0000000049454E44AE426082}
     Stretch = True
   end
+  object LblEmblema: TLabel
+    Left = 234
+    Top = 21
+    Width = 86
+    Height = 60
+    Caption = '    Sem'#13#10'emblema'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -21
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
+  object LblBandeira: TLabel
+    Left = 370
+    Top = 99
+    Width = 290
+    Height = 65
+    Caption = 'Sem bandeira'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clRed
+    Font.Height = -48
+    Font.Name = 'Segoe UI'
+    Font.Style = []
+    ParentFont = False
+    Visible = False
+  end
   object EdtPais: TEdit
     Left = 8
     Top = 22
@@ -445,7 +473,7 @@ object FrmTelaConsultaPaises: TFrmTelaConsultaPaises
   object EdtRegiao: TEdit
     Left = 8
     Top = 188
-    Width = 137
+    Width = 146
     Height = 23
     Color = clLavender
     ReadOnly = True
@@ -460,7 +488,7 @@ object FrmTelaConsultaPaises: TFrmTelaConsultaPaises
     ReadOnly = True
     TabOrder = 8
   end
-  object EdtlSubRegiao: TEdit
+  object EdtSubRegiao: TEdit
     Left = 160
     Top = 188
     Width = 161
@@ -472,7 +500,7 @@ object FrmTelaConsultaPaises: TFrmTelaConsultaPaises
   object EdtPopulacao: TEdit
     Left = 8
     Top = 231
-    Width = 137
+    Width = 146
     Height = 23
     Color = clLavender
     ReadOnly = True

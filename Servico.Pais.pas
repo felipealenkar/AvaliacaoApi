@@ -24,7 +24,7 @@ type
       constructor Create;
       destructor Destroy; override;
       function ObterDadosDoPais(PPais: string): TPais;
-      function ColetarCampoSeExistir(PJsonObject: TJSONObject; PCampo: String): string;
+      function ColetarStringDoObjetoSeExistir(PJsonObject: TJSONObject; PCampo: String): string;
       function ObterImagemComTREST(PJsonString: string): TMemoryStream;
       function ObterImagemComTNetHttp(PJsonString: string): TMemoryStream;
       function AlimentarClasse(PJsonString: string): TPais;
@@ -54,29 +54,48 @@ begin
     LPorObject := LTranslationsObject.GetValue('por') as TJSONObject;
     LCapitalArray := LJsonObject.GetValue('capital') as TJSONArray;
     LCurrenciesObject := LJsonObject.GetValue('currencies') as TJSONObject;
-    LPair := LCurrenciesObject.Pairs[0];
-    LCurrenciesObject := LPair.JsonValue as TJSONObject;
+
+    if Assigned(LCurrenciesObject) then
+    begin
+      LPair := LCurrenciesObject.Pairs[0];
+      LCurrenciesObject := LPair.JsonValue as TJSONObject;
+    end;
+
     LcoatOfArmsObject := LJsonObject.GetValue('coatOfArms') as TJSONObject;
     LFlagsObject := LJsonObject.GetValue('flags') as TJSONObject;
     LMapsObject := LJsonObject.GetValue('maps') as TJSONObject;
 
-    Result.Nome := LPorObject.GetValue<string>('official');
-    Result.Capital := LCapitalArray.Items[0].GetValue<string>;
-    Result.Regiao := LJsonObject.GetValue<string>('region');
-    Result.SubRegiao := LJsonObject.GetValue<string>('subregion');
-    Result.Populacao := LJsonObject.GetValue<int64>('population');
-    Result.Moeda := Format('%s - %s', [LCurrenciesObject.GetValue<string>('name'),
-      LCurrenciesObject.GetValue<string>('symbol')]);
+    if Assigned(LPorObject) then 
+      Result.Nome := LPorObject.GetValue<string>('official');
 
-    //Tratamento feito devido a alguns países não possuírem os campos de emblema, bandeira e mapas
-    //Resultando em erro.
-    if ColetarCampoSeExistir(LcoatOfArmsObject, 'png') <> '' then
+    if Assigned(LJsonObject) then 
+    begin
+      Result.Regiao := LJsonObject.GetValue<string>('region'); 
+      Result.Populacao := LJsonObject.GetValue<int64>('population');
+    end;
+
+    //Tratamento feito devido a alguns países não possuírem os campos de capital, moeda, 
+    //emblema, bandeira e mapas, resultando em erro.
+
+    if Assigned(LCapitalArray) then
+      Result.Capital := LCapitalArray.Items[0].GetValue<string>;
+
+    if ColetarStringDoObjetoSeExistir(LJsonObject, 'subregion') <> '' then
+      Result.SubRegiao := LJsonObject.GetValue<string>('subregion');
+        
+    if Assigned(LCurrenciesObject) then
+    begin
+      Result.Moeda := Format('%s - %s', [LCurrenciesObject.GetValue<string>('name'),
+      LCurrenciesObject.GetValue<string>('symbol')]);
+    end;
+
+    if ColetarStringDoObjetoSeExistir(LcoatOfArmsObject, 'png') <> '' then
       Result.Emblema.LoadFromStream(ObterImagemComTNetHttp(LcoatOfArmsObject.GetValue<string>('png')));
 
-    if ColetarCampoSeExistir(LFlagsObject, 'png') <> '' then
+    if ColetarStringDoObjetoSeExistir(LFlagsObject, 'png') <> '' then
       Result.Bandeira.LoadFromStream(ObterImagemComTNetHttp(LFlagsObject.GetValue<string>('png')));
 
-    if ColetarCampoSeExistir(LMapsObject, 'googleMaps') <> '' then
+    if ColetarStringDoObjetoSeExistir(LMapsObject, 'googleMaps') <> '' then
       Result.Mapa := LMapsObject.GetValue<string>('googleMaps');
   except
     raise;
@@ -105,7 +124,7 @@ begin
   inherited;
 end;
 
-function TServicoPais.ColetarCampoSeExistir(PJsonObject: TJSONObject; PCampo: String): string;
+function TServicoPais.ColetarStringDoObjetoSeExistir(PJsonObject: TJSONObject; PCampo: String): string;
 begin
   Result := '';
   if Assigned(PJsonObject) then

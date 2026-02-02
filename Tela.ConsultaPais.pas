@@ -24,11 +24,13 @@ type
     LblNomeDaMoeda: TLabel;
     EdtNomeDaMoeda: TEdit;
     LblSubRegiao: TLabel;
-    EdtlSubRegiao: TEdit;
+    EdtSubRegiao: TEdit;
     EdtPopulacao: TEdit;
     ImgBandeira: TImage;
     ImgEmblema: TImage;
     BtnMapa: TButton;
+    LblEmblema: TLabel;
+    LblBandeira: TLabel;
     procedure BtnConsultarClick(Sender: TObject);
     procedure EdtPaisKeyPress(Sender: TObject; var Key: Char);
     procedure BtnMapaClick(Sender: TObject);
@@ -37,6 +39,7 @@ type
   private
     FPais: TPais;
     function ConsultarPais: Boolean;
+    procedure ModificarComponentes;
     procedure PreencherCampos;
   public
     { Public declarations }
@@ -58,10 +61,7 @@ begin
       Exit;
     end;
       PreencherCampos;
-      if FPais.Mapa <> '' then
-        BtnMapa.Enabled := True
-      else
-        BtnMapa.Enabled := False;
+      ModificarComponentes;
   except
     On E:Exception do
       ShowMessage(E.Message);
@@ -112,20 +112,51 @@ begin
   FPais.Free;
 end;
 
+procedure TFrmTelaConsultaPaises.ModificarComponentes;
+begin
+  if FPais.Mapa <> '' then
+    BtnMapa.Enabled := True
+  else
+    BtnMapa.Enabled := False;
+
+  if EdtCapital.Text = '' then
+  begin
+    EdtCapital.Text := 'Não existe capital.';
+    EdtCapital.Font.Color := clRed;
+  end
+  else
+    EdtCapital.Font.Color := clBlack;
+
+  if EdtSubRegiao.Text = '' then
+  begin
+    EdtSubRegiao.Text := 'Não existe subregião.';
+    EdtSubRegiao.Font.Color := clRed;
+  end
+  else
+    EdtSubRegiao.Font.Color := clBlack;
+
+  if EdtNomeDaMoeda.Text = '' then
+  begin
+    EdtNomeDaMoeda.Text := 'Não existe moeda.';
+    EdtNomeDaMoeda.Font.Color := clRed;
+  end
+  else
+    EdtNomeDaMoeda.Font.Color := clBlack;
+
+  LblEmblema.Visible := FPais.Emblema.Size = 0;
+  LblBandeira.Visible := FPais.Bandeira.Size = 0;
+end;
+
 procedure TFrmTelaConsultaPaises.PreencherCampos;
 begin
   EdtNomeOficial.Text := FPais.Nome;
+
   EdtCapital.Text := FPais.Capital;
   EdtRegiao.Text := FPais.Regiao;
-  EdtlSubRegiao.Text := FPais.SubRegiao;
+  EdtSubRegiao.Text := FPais.SubRegiao;
   EdtPopulacao.Text := FormatFloat('#,##0', FPais.Populacao);
   EdtNomeDaMoeda.Text := FPais.Moeda;
   ImgEmblema.Picture.LoadFromStream(FPais.Emblema);
   ImgBandeira.Picture.LoadFromStream(FPais.Bandeira);
-
-  if FPais.Emblema.Size = 0 then
-    ShowMessage('País sem emblema.');
-  if FPais.Bandeira.Size = 0 then
-    ShowMessage('País sem bandeira.');
 end;
 end.
