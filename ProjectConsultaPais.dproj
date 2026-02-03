@@ -129,6 +129,18 @@
         </DCCReference>
         <DCCReference Include="Servico.Pais.pas"/>
         <DCCReference Include="Modelo.Pais.pas"/>
+        <None Include="ModelSupport_ProjectConsultaPais\default.txaPackage"/>
+        <None Include="ModelSupport_ProjectConsultaPais\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Modelo\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Tela\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Servico\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\ProjectConsultaPais\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Modelo\Pais\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Tela\ConsultaPais\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Servico\Pais\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Servico\Namespace1\default.txvpck"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Servico\default.txaPackage"/>
+        <None Include="ModelSupport_ProjectConsultaPais\Servico\Namespace1\default.txaPackage"/>
         <BuildConfiguration Include="Base">
             <Key>Base</Key>
         </BuildConfiguration>
@@ -151,6 +163,24 @@
                 </Source>
             </Delphi.Personality>
             <Deployment Version="5">
+                <DeployFile LocalName="ModelSupport_ProjectConsultaPais\Servico\Namespace1\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_ProjectConsultaPais\Servico\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
+                <DeployFile LocalName="ModelSupport_ProjectConsultaPais\default.txaPackage" Configuration="Debug" Class="ProjectFile">
+                    <Platform Name="Win32">
+                        <RemoteDir>.\</RemoteDir>
+                        <Overwrite>true</Overwrite>
+                    </Platform>
+                </DeployFile>
                 <DeployFile LocalName="Win32\Debug\ProjectConsultaPais.exe" Configuration="Debug" Class="ProjectOutput">
                     <Platform Name="Win32">
                         <RemoteName>ProjectConsultaPais.exe</RemoteName>
@@ -1112,6 +1142,7 @@
                 <Platform value="Win32">True</Platform>
                 <Platform value="Win64">True</Platform>
             </Platforms>
+            <ModelSupport>True</ModelSupport>
         </BorlandProject>
         <ProjectFileVersion>12</ProjectFileVersion>
     </ProjectExtensions>

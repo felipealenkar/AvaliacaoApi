@@ -13,6 +13,7 @@ type
       FRegiao: string;
       FSubRegiao: string;
       FPopulacao: int64;
+      FFusosHorarios: TStringList;
       FMoeda: string;
       FEmblema: TMemoryStream;
       FBandeira: TMemoryStream;
@@ -23,6 +24,7 @@ type
       property Regiao: string read FRegiao write FRegiao;
       property SubRegiao: string read FSubRegiao write FSubRegiao;
       property Populacao: int64 read FPopulacao write FPopulacao;
+      property FusosHorarios: TStringList read FFusosHorarios write FFusosHorarios;
       property Moeda: string read FMoeda write FMoeda;
       property Emblema: TMemoryStream read FEmblema write FEmblema;
       property Bandeira: TMemoryStream read FBandeira write FBandeira;
@@ -40,12 +42,14 @@ constructor TPais.Create;
 begin
   FEmblema := TMemoryStream.Create;
   FBandeira := TMemoryStream.Create;
+  FFusosHorarios := TStringList.Create;
 end;
 
 destructor TPais.Destroy;
 begin
   FEmblema.Free;
   FBandeira.Free;
+  FFusosHorarios.Free;
   inherited;
 end;
 

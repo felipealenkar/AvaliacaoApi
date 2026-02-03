@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<nodeSet version="1.0">
+  <view uin="n1wcagfmw1ipb6b3j_v">
+    <property name="$defaultDiagram" value="true" />
+    <property name="$metaclass" value="Package Diagram" />
+    <property name="$name" value="default" />
+    <reference referencedUin="design:view:::ay8mw9bfr3ijptsak_v">
+      <property name="$shortcutReference" value="true" />
+      <reference referencedUin="delphi:e_class:src:ProjectConsultaPais:Servico.Pais.@unitclass" />
+      <reference referencedUin="delphi:e_class:src:ProjectConsultaPais:Servico.Pais.TServicoPais" />
+    </reference>
+    <reference referencedUin="design:view:::qmn8hqwfjgnudstgk_v">
+      <property name="$shortcutReference" value="true" />
+    </reference>
+  </view>
+</nodeSet>
